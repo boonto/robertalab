@@ -1,6 +1,7 @@
 package de.fhg.iais.roberta.visitor.sensor;
 
 import de.fhg.iais.roberta.syntax.sensor.generic.AccelerometerSensor;
+import de.fhg.iais.roberta.syntax.sensor.generic.AugmentedRealitySensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.BrickSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.ColorSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.CompassSensor;
@@ -257,5 +258,15 @@ public interface AstSensorsVisitor<V> extends AstVisitor<V> {
 
     default V visitRfidSensor(RfidSensor<V> rfidSensor) {
         throw new DbcException("RfidSensor not implemented!");
+    }
+
+    /**
+     * visit a {@link AugmentedRealitySensor}.
+     *
+     * @param AugmentedRealitySensor to be visited
+     */
+
+    default V visitAugmentedRealitySensor(AugmentedRealitySensor<V> augmentedRealitySensor) {
+        throw new DbcException("AugmentedRealitySensor not implemented!");
     }
 }

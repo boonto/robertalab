@@ -1,13 +1,13 @@
 package de.fhg.iais.roberta.mode.sensor;
 
-import de.fhg.iais.roberta.inter.mode.sensor.IUltrasonicSensorMode;
+import de.fhg.iais.roberta.inter.mode.sensor.IAugmentedRealitySensorMode;
 
-public enum UltrasonicSensorMode implements IUltrasonicSensorMode {
-    DEFAULT, DISTANCE( "Distance" ), PRESENCE( "Listen" );
+public enum AugmentedRealitySensorMode implements IAugmentedRealitySensorMode {
+    DEFAULT, DISTANCE( "Distance" );
 
     private final String[] values;
 
-    private UltrasonicSensorMode(String... values) {
+    private AugmentedRealitySensorMode(String... values) {
         this.values = values;
     }
 

@@ -54,6 +54,7 @@ import de.fhg.iais.roberta.syntax.lang.stmt.Stmt;
 import de.fhg.iais.roberta.syntax.lang.stmt.WaitStmt;
 import de.fhg.iais.roberta.syntax.sensor.ExternalSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.AccelerometerSensor;
+import de.fhg.iais.roberta.syntax.sensor.generic.AugmentedRealitySensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.BrickSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.ColorSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.CompassSensor;
@@ -393,6 +394,11 @@ public abstract class RobotCommonCheckVisitor extends CheckVisitor implements As
     @Override
     public Void visitBluetoothCheckConnectAction(BluetoothCheckConnectAction<Void> bluetoothCheckConnectAction) {
         bluetoothCheckConnectAction.getConnection().visit(this);
+        return null;
+    }
+
+    @Override
+    public Void visitAugmentedRealitySensor(AugmentedRealitySensor<Void> augmentedRealitySensor) {
         return null;
     }
 

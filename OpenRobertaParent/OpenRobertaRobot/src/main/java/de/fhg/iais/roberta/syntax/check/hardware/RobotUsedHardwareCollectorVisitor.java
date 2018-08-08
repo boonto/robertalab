@@ -41,6 +41,7 @@ import de.fhg.iais.roberta.syntax.action.sound.VolumeAction;
 import de.fhg.iais.roberta.syntax.action.sound.VolumeAction.Mode;
 import de.fhg.iais.roberta.syntax.check.CheckVisitor;
 import de.fhg.iais.roberta.syntax.sensor.generic.AccelerometerSensor;
+import de.fhg.iais.roberta.syntax.sensor.generic.AugmentedRealitySensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.BrickSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.ColorSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.CompassSensor;
@@ -447,4 +448,8 @@ public abstract class RobotUsedHardwareCollectorVisitor extends CheckVisitor imp
         return null;
     }
 
+    @Override
+    public Void visitAugmentedRealitySensor(AugmentedRealitySensor<Void> augmentedRealitySensor) {
+        return null;
+    }
 }

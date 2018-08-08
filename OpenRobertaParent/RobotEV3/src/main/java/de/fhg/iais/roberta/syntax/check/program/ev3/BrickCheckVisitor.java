@@ -7,6 +7,7 @@ import de.fhg.iais.roberta.syntax.action.light.LedAction;
 import de.fhg.iais.roberta.syntax.action.motor.MotorOnAction;
 import de.fhg.iais.roberta.syntax.action.sound.SayTextAction;
 import de.fhg.iais.roberta.syntax.check.program.RobotBrickCheckVisitor;
+import de.fhg.iais.roberta.syntax.sensor.generic.AugmentedRealitySensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.CompassSensor;
 import de.fhg.iais.roberta.typecheck.NepoInfo;
 
@@ -50,6 +51,14 @@ public class BrickCheckVisitor extends RobotBrickCheckVisitor {
     @Override
     public Void visitLedAction(LedAction<Void> ledAction) {
         // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Void visitAugmentedRealitySensor(AugmentedRealitySensor<Void> augmentedRealitySensor) {
+        if ( this.brickConfiguration.getRobotName().equals("ev3dev")) {
+            augmentedRealitySensor.addInfo(NepoInfo.warning("BLOCK_NOT_EXECUTED"));
+        }
         return null;
     }
 }

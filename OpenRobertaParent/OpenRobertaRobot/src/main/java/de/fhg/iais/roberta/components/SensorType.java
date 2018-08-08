@@ -33,6 +33,7 @@ public enum SensorType implements ISensorType {
     DROP( "robBrick_drop" ),
     PULSE( "robBrick_pulse" ),
     RFID( "robBrick_rfide" ),
+    AUGMENTEDREALITY ( "robBrick_augmentedreality" ),
     NONE( "" );
 
     private final String[] values;

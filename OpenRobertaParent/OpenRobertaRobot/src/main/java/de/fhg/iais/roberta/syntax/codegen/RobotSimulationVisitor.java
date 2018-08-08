@@ -3,6 +3,7 @@ package de.fhg.iais.roberta.syntax.codegen;
 import java.util.ArrayList;
 import java.util.List;
 
+import de.fhg.iais.roberta.syntax.sensor.generic.AugmentedRealitySensor;
 import org.apache.commons.lang3.StringEscapeUtils;
 
 import de.fhg.iais.roberta.components.Configuration;
@@ -830,6 +831,11 @@ public abstract class RobotSimulationVisitor<V> implements AstLanguageVisitor<V>
 
     @Override
     public V visitBluetoothCheckConnectAction(BluetoothCheckConnectAction<V> bluetoothCheckConnectAction) {
+        return null;
+    }
+
+    @Override
+    public V visitAugmentedRealitySensor(AugmentedRealitySensor<V> augmentedRealitySensor) {
         return null;
     }
 

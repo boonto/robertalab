@@ -74,6 +74,7 @@ import de.fhg.iais.roberta.syntax.lang.functions.TextPrintFunct;
 import de.fhg.iais.roberta.syntax.lang.stmt.StmtList;
 import de.fhg.iais.roberta.syntax.lang.stmt.WaitStmt;
 import de.fhg.iais.roberta.syntax.lang.stmt.WaitTimeStmt;
+import de.fhg.iais.roberta.syntax.sensor.generic.AugmentedRealitySensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.BrickSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.ColorSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.CompassSensor;
@@ -940,6 +941,11 @@ public class PythonVisitor extends RobotPythonVisitor implements AstSensorsVisit
 
     @Override
     public Void visitBluetoothCheckConnectAction(BluetoothCheckConnectAction<Void> bluetoothCheckConnectAction) {
+        return null;
+    }
+
+    @Override
+    public Void visitAugmentedRealitySensor(AugmentedRealitySensor<Void> augmentedRealitySensor) {
         return null;
     }
 

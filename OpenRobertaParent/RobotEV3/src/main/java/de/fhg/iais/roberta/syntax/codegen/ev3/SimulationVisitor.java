@@ -37,6 +37,7 @@ import de.fhg.iais.roberta.syntax.action.sound.SayTextAction;
 import de.fhg.iais.roberta.syntax.action.sound.SetLanguageAction;
 import de.fhg.iais.roberta.syntax.action.sound.VolumeAction;
 import de.fhg.iais.roberta.syntax.codegen.RobotSimulationVisitor;
+import de.fhg.iais.roberta.syntax.sensor.generic.AugmentedRealitySensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.BrickSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.ColorSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.CompassSensor;
@@ -376,6 +377,12 @@ public class SimulationVisitor extends RobotSimulationVisitor<Void> {
 
     @Override
     public Void visitIRSeekerSensor(IRSeekerSensor<Void> irSeekerSensor) {
+        this.sb.append("null");
+        return null;
+    }
+
+    @Override
+    public Void visitAugmentedRealitySensor(AugmentedRealitySensor<Void> augmentedRealitySensor) {
         this.sb.append("null");
         return null;
     }

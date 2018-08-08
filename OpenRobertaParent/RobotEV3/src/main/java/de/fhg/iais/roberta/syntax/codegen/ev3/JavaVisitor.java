@@ -78,6 +78,7 @@ import de.fhg.iais.roberta.syntax.lang.functions.MathRandomIntFunct;
 import de.fhg.iais.roberta.syntax.lang.functions.TextJoinFunct;
 import de.fhg.iais.roberta.syntax.lang.stmt.WaitStmt;
 import de.fhg.iais.roberta.syntax.lang.stmt.WaitTimeStmt;
+import de.fhg.iais.roberta.syntax.sensor.generic.AugmentedRealitySensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.BrickSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.ColorSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.CompassSensor;
@@ -1009,6 +1010,13 @@ public class JavaVisitor extends RobotJavaVisitor implements AstSensorsVisitor<V
 
     @Override
     public Void visitBluetoothCheckConnectAction(BluetoothCheckConnectAction<Void> bluetoothCheckConnectAction) {
+        return null;
+    }
+
+
+    @Override
+    public Void visitAugmentedRealitySensor(AugmentedRealitySensor<Void> augmentedRealitySensor) {
+        this.sb.append("hal.getAugmentedRealitySensorDistance()");
         return null;
     }
 

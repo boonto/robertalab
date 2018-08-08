@@ -28,6 +28,7 @@ import de.fhg.iais.roberta.inter.mode.general.IListElementOperations;
 import de.fhg.iais.roberta.inter.mode.general.IMode;
 import de.fhg.iais.roberta.inter.mode.general.IPickColor;
 import de.fhg.iais.roberta.inter.mode.general.IWorkingState;
+import de.fhg.iais.roberta.inter.mode.sensor.IAugmentedRealitySensorMode;
 import de.fhg.iais.roberta.inter.mode.sensor.IBirckKeyPressMode;
 import de.fhg.iais.roberta.inter.mode.sensor.IBrickKey;
 import de.fhg.iais.roberta.inter.mode.sensor.IColorSensorMode;
@@ -74,6 +75,7 @@ import de.fhg.iais.roberta.mode.general.ListElementOperations;
 import de.fhg.iais.roberta.mode.general.PickColor;
 import de.fhg.iais.roberta.mode.general.PlaceholderSensorMode;
 import de.fhg.iais.roberta.mode.general.WorkingState;
+import de.fhg.iais.roberta.mode.sensor.AugmentedRealitySensorMode;
 import de.fhg.iais.roberta.mode.sensor.Axis;
 import de.fhg.iais.roberta.mode.sensor.BrickKeyPressMode;
 import de.fhg.iais.roberta.mode.sensor.ColorSensorMode;
@@ -652,6 +654,17 @@ public interface IRobotFactory {
      */
     default IGestureSensorMode getGestureSensorMode(String mode) {
         return IRobotFactory.getModeValue(mode, GestureSensorMode.class);
+    }
+
+    /**
+     * Get a augmented reality sensor mode from {@link IAugmentedRealitySensorMode} given string parameter. It is possible for one augmented reality sensor mode to have multiple
+     * string mappings. Throws exception if the augmented reality sensor mode does not exists.
+     *
+     * @param name of the augmented reality sensor mode
+     * @return the augmented reality sensor mode from the enum {@link IAugmentedRealitySensorMode}
+     */
+    default IAugmentedRealitySensorMode getAugmentedRealitySensorMode(String mode) {
+        return IRobotFactory.getModeValue(mode, AugmentedRealitySensorMode.class);
     }
 
     /**
