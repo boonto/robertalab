@@ -16,6 +16,7 @@ import de.fhg.iais.roberta.syntax.action.display.ShowPictureAction;
 import de.fhg.iais.roberta.syntax.action.light.LedAction;
 import de.fhg.iais.roberta.syntax.action.sound.SayTextAction;
 import de.fhg.iais.roberta.syntax.check.hardware.RobotUsedHardwareCollectorVisitor;
+import de.fhg.iais.roberta.syntax.sensor.generic.AugmentedRealitySensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.GyroSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.InfraredSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.TemperatureSensor;
@@ -29,6 +30,7 @@ public class UsedHardwareCollectorVisitor extends RobotUsedHardwareCollectorVisi
     private final Set<String> usedImages = new HashSet<>();
 
     private boolean isSayTextUsed = false;
+    private boolean isARSensorUsed = false;
 
     public UsedHardwareCollectorVisitor(ArrayList<ArrayList<Phrase<Void>>> phrasesSet, Configuration brickConfiguration) {
         super(brickConfiguration);
@@ -41,6 +43,10 @@ public class UsedHardwareCollectorVisitor extends RobotUsedHardwareCollectorVisi
 
     public boolean isSayTextUsed() {
         return this.isSayTextUsed;
+    }
+
+    public boolean isARSensorUsed() {
+        return this.isARSensorUsed;
     }
 
     @Override
@@ -83,6 +89,13 @@ public class UsedHardwareCollectorVisitor extends RobotUsedHardwareCollectorVisi
     @Override
     public Void visitLedAction(LedAction<Void> ledAction) {
         // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public Void visitAugmentedRealitySensor(AugmentedRealitySensor<Void> augmentedRealitySensor) {
+        super.visitAugmentedRealitySensor(augmentedRealitySensor);
+        this.isARSensorUsed = true;
         return null;
     }
 

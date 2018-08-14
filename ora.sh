@@ -205,9 +205,9 @@ case "$cmd" in
 
 --java)           _checkJava ;;
 
---update-lejos)   serverUrl="$1"
-                  lejosVersion="$2"
-				  LEJOSIPADDR='10.0.1.1'
+--update-lejos)   serverUrl="192.168.178.24"
+                  lejosVersion="v1"
+				  LEJOSIPADDR='192.168.178.61'
                   if [[ "$serverUrl" == '' ]]
                   then
                     echo "the server URL is missing. Exit 1"

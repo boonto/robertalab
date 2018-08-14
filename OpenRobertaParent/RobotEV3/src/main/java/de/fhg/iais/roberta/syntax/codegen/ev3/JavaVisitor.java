@@ -117,6 +117,7 @@ public class JavaVisitor extends RobotJavaVisitor implements AstSensorsVisitor<V
 
     protected ILanguage language;
     private final boolean isSayTextUsed;
+    private final boolean isARSensorUsed;
 
     /**
      * initialize the Java code generator visitor.
@@ -141,6 +142,7 @@ public class JavaVisitor extends RobotJavaVisitor implements AstSensorsVisitor<V
         this.usedActors = checkVisitor.getUsedActors();
         this.usedImages = checkVisitor.getUsedImages();
         this.isSayTextUsed = checkVisitor.isSayTextUsed();
+        this.isARSensorUsed = checkVisitor.isARSensorUsed();
 
         this.loopsLabels = checkVisitor.getloopsLabelContainer();
 
@@ -702,6 +704,10 @@ public class JavaVisitor extends RobotJavaVisitor implements AstSensorsVisitor<V
             this.sb.append(INDENT).append(INDENT).append("hal.setLanguage(\"");
             this.sb.append(this.getLanguageString(this.language));
             this.sb.append("\");");
+        }
+        if (this.isARSensorUsed && !this.brickConfiguration.getRobotName().equals("ev3lejos")) {
+            indent();
+            this.sb.append("hal.initAugmentedRealitySensor(\"192.168.178.20\", 48269);");
         }
         return null;
     }
