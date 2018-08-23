@@ -3,6 +3,8 @@ package de.fhg.iais.roberta.transformer.ev3;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 import de.fhg.iais.roberta.blockly.generated.Block;
 import de.fhg.iais.roberta.blockly.generated.BlockSet;
@@ -117,7 +119,20 @@ public class Jaxb2Ev3ConfigurationTransformer {
                 List<Value> values = extractValues(block, (short) 8);
                 extractHardwareComponent(values, sensors, actors);
 
-                return new EV3Configuration.Builder().setTrackWidth(trackWidth).setWheelDiameter(wheelDiameter).addActors(actors).addSensors(sensors).build();
+                Optional<Value> optional = values.stream().filter(value -> {
+                    return value.getBlock().getType().equals("robBrick_augmentedreality"); // TODO fix quick solution
+                }).findFirst();
+                String ipAddress = "";
+                String port = "";
+                if (optional.isPresent()) {
+                    Block arSensor = optional.get().getBlock();
+                    List<Field> addressFields = extractFields(arSensor, (short) 2);
+                    ipAddress = extractField(addressFields, "IP_ADDRESS", (short) 0);
+                    port = extractField(addressFields, "PORT", (short) 1);
+                }
+
+                return new EV3Configuration.Builder().setTrackWidth(trackWidth).setWheelDiameter(wheelDiameter).addActors(actors).addSensors(sensors)
+                    .setArDeviceIpAddress(ipAddress).setArDevicePort(port).build();
             default:
                 throw new DbcException("There was no correct configuration block found!");
         }

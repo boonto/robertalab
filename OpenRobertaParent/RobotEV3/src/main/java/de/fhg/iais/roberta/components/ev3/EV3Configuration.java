@@ -19,8 +19,22 @@ import de.fhg.iais.roberta.util.dbc.DbcException;
 
 public class EV3Configuration extends Configuration {
 
-    public EV3Configuration(Map<IActorPort, Actor> actors, Map<ISensorPort, Sensor> sensors, double wheelDiameterCM, double trackWidthCM) {
+    private final String arDeviceIpAddress;
+    private final String arDevicePort;
+
+    public EV3Configuration(Map<IActorPort, Actor> actors, Map<ISensorPort, Sensor> sensors, double wheelDiameterCM, double trackWidthCM,
+        String arDeviceIpAddress, String arDevicePort) {
         super(actors, sensors, wheelDiameterCM, trackWidthCM);
+        this.arDeviceIpAddress = arDeviceIpAddress;
+        this.arDevicePort = arDevicePort;
+    }
+
+    public String getArDeviceIpAddress() {
+        return this.arDeviceIpAddress;
+    }
+
+    public String getArDevicePort() {
+        return this.arDevicePort;
     }
 
     /**
@@ -149,6 +163,9 @@ public class EV3Configuration extends Configuration {
         private double wheelDiameter;
         private double trackWidth;
 
+        private String arDeviceIpAddress;
+        private String arDevicePort;
+
         /**
          * Add actor to the {@link Configuration}
          *
@@ -228,9 +245,19 @@ public class EV3Configuration extends Configuration {
             return this;
         }
 
+        public Builder setArDeviceIpAddress(String ipAddress) {
+            this.arDeviceIpAddress = ipAddress;
+            return this;
+        }
+
+        public Builder setArDevicePort(String port) {
+            this.arDevicePort = port;
+            return this;
+        }
+
         @Override
         public Configuration build() {
-            return new EV3Configuration(this.actorMapping, this.sensorMapping, this.wheelDiameter, this.trackWidth);
+            return new EV3Configuration(this.actorMapping, this.sensorMapping, this.wheelDiameter, this.trackWidth, this.arDeviceIpAddress, this.arDevicePort);
         }
 
         @Override

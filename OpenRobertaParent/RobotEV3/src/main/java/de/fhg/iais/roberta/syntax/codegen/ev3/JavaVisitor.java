@@ -707,7 +707,11 @@ public class JavaVisitor extends RobotJavaVisitor implements AstSensorsVisitor<V
         }
         if (this.isARSensorUsed && !this.brickConfiguration.getRobotName().equals("ev3lejos")) {
             indent();
-            this.sb.append("hal.initAugmentedRealitySensor(\"192.168.178.20\", 48269);");
+            this.sb.append("hal.initAugmentedRealitySensor(\"")
+                .append(this.brickConfiguration.getArDeviceIpAddress())
+                .append("\", ")
+                .append(this.brickConfiguration.getArDevicePort())
+                .append(");");
         }
         return null;
     }
