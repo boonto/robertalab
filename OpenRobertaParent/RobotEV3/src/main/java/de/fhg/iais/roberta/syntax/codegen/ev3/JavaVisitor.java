@@ -209,7 +209,10 @@ public class JavaVisitor extends RobotJavaVisitor implements AstSensorsVisitor<V
                 this.sb.append("\n");
                 this.sb.append(INDENT).append(INDENT).append("hal.closeResources();\n");
             }
-
+            if ( this.isARSensorUsed) {
+                nlIndent();
+                this.sb.append("hal.stopAugmentedRealitySensor();\n");
+            }
             this.sb.append(INDENT).append("}");
         }
         this.sb.append("\n").append("}");
