@@ -10,6 +10,7 @@ import de.fhg.iais.roberta.syntax.Phrase;
 import de.fhg.iais.roberta.syntax.SC;
 import de.fhg.iais.roberta.syntax.action.ev3.ShowPictureAction;
 import de.fhg.iais.roberta.syntax.action.speech.SayTextAction;
+import de.fhg.iais.roberta.syntax.sensor.generic.AugmentedRealitySensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.GyroSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.InfraredSensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.TemperatureSensor;
@@ -24,6 +25,7 @@ public final class Ev3UsedHardwareCollectorVisitor extends AbstractUsedHardwareC
     private final Set<String> usedImages = new HashSet<>();
 
     private boolean isSayTextUsed = false;
+    private boolean isARSensorUsed = false;
 
     public Ev3UsedHardwareCollectorVisitor(ArrayList<ArrayList<Phrase<Void>>> phrasesSet, Configuration brickConfiguration) {
         super(brickConfiguration);
@@ -36,6 +38,10 @@ public final class Ev3UsedHardwareCollectorVisitor extends AbstractUsedHardwareC
 
     public boolean isSayTextUsed() {
         return this.isSayTextUsed;
+    }
+
+    public boolean isARSensorUsed() {
+        return this.isARSensorUsed;
     }
 
     @Override
@@ -74,4 +80,9 @@ public final class Ev3UsedHardwareCollectorVisitor extends AbstractUsedHardwareC
         return null;
     }
 
+    @Override
+    public Void visitAugmentedRealitySensor(AugmentedRealitySensor<Void> augmentedRealitySensor) {
+        this.isARSensorUsed = true;
+        return null;
+    }
 }

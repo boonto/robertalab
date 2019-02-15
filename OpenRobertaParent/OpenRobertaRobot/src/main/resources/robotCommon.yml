@@ -103,6 +103,10 @@ block:
       category: SENSOR
       implementor: de.fhg.iais.roberta.syntax.sensor.generic.PinTouchSensor
       type: [robsensors_pintouch_getsample]
+  AUGMENTEDREALITY_SENSING :
+      category: SENSOR
+      implementor: de.fhg.iais.roberta.syntax.sensor.generic.AugmentedRealitySensor
+      type: [robSensors_augmentedreality_getSample]
   STRING_CONST:
       category: EXPR
       implementor: de.fhg.iais.roberta.syntax.lang.expr.StringConst
@@ -405,6 +409,10 @@ wait:
         implementor: de.fhg.iais.roberta.syntax.sensor.generic.AccelerometerSensor
         sensor: ACCELEROMETER
         mode: Z
+  AUGMENTEDREALITY_DISTANCE :
+        implementor: de.fhg.iais.roberta.syntax.sensor.generic.AugmentedRealitySensor
+        sensor: AUGMENTEDREALITY
+        mode: DISTANCE
   COLOUR_AMBIENTLIGHT :
         implementor: de.fhg.iais.roberta.syntax.sensor.generic.ColorSensor
         sensor: COLOUR
@@ -676,6 +684,7 @@ wait:
         
 mode:
   accelerometer: [DEFAULT,VALUE]
+  augmentedreality: [DISTANCE]
   axis: [DEFAULT,STRENGTH,VALUE,X,Y,Z]
   color: [AMBIENTLIGHT,COLOUR,DEFAULT,RED,RGB]
   compass: [ANGLE,CALIBRATE,COMPASS,DEFAULT,VALUE]
@@ -700,6 +709,7 @@ mode:
 configuration:
   ACCELEROMETER: [robBrick_accelerometer]
   ANALOG_PIN: [robActions_write_to_pin, robConf_analogout]
+  AUGMENTEDREALITY: [robBrick_augmentedreality]
   DIGITAL_PIN: [robConf_digitalout]
   ANALOG_INPUT: [robConf_analogin]
   DIGITAL_INPUT: [robConf_digitalin] 

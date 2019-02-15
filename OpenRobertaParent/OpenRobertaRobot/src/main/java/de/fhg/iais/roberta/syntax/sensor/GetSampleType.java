@@ -82,7 +82,8 @@ public enum GetSampleType {
     DROP_VALUE( "SENSORPORT", "DROP", "VALUE", "SLOT" ),
     FLAME_VALUE( "SENSORPORT", "FLAME", "FLAME_VALUE", "SLOT" ),
     RFID_SERIAL( "SENSORPORT", "RFID", "SERIAL", "SLOT" ),
-    RFID_PRESENCE( "SENSORPORT", "RFID", "PRESENCE", "SLOT" );
+    RFID_PRESENCE( "SENSORPORT", "RFID", "PRESENCE", "SLOT" ),
+    AUGMENTEDREALITY_DISTANCE( "SENSORPORT", "AUGMENTEDREALITY", "DISTANCE", "SLOT" );
     private final String portTypeName;
     private final String sensorType;
     private final String sensorMode;

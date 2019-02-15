@@ -8,11 +8,7 @@ import static de.fhg.iais.roberta.mode.general.ListElementOperations.INSERT;
 import static de.fhg.iais.roberta.mode.general.ListElementOperations.REMOVE;
 import static de.fhg.iais.roberta.mode.general.ListElementOperations.SET;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import de.fhg.iais.roberta.components.Configuration;
 import de.fhg.iais.roberta.components.ConfigurationComponent;
@@ -71,17 +67,7 @@ import de.fhg.iais.roberta.syntax.lang.functions.MathRandomIntFunct;
 import de.fhg.iais.roberta.syntax.lang.functions.TextJoinFunct;
 import de.fhg.iais.roberta.syntax.lang.stmt.WaitStmt;
 import de.fhg.iais.roberta.syntax.lang.stmt.WaitTimeStmt;
-import de.fhg.iais.roberta.syntax.sensor.generic.ColorSensor;
-import de.fhg.iais.roberta.syntax.sensor.generic.CompassSensor;
-import de.fhg.iais.roberta.syntax.sensor.generic.EncoderSensor;
-import de.fhg.iais.roberta.syntax.sensor.generic.GyroSensor;
-import de.fhg.iais.roberta.syntax.sensor.generic.IRSeekerSensor;
-import de.fhg.iais.roberta.syntax.sensor.generic.InfraredSensor;
-import de.fhg.iais.roberta.syntax.sensor.generic.KeysSensor;
-import de.fhg.iais.roberta.syntax.sensor.generic.SoundSensor;
-import de.fhg.iais.roberta.syntax.sensor.generic.TimerSensor;
-import de.fhg.iais.roberta.syntax.sensor.generic.TouchSensor;
-import de.fhg.iais.roberta.syntax.sensor.generic.UltrasonicSensor;
+import de.fhg.iais.roberta.syntax.sensor.generic.*;
 import de.fhg.iais.roberta.typecheck.BlocklyType;
 import de.fhg.iais.roberta.util.dbc.Assert;
 import de.fhg.iais.roberta.util.dbc.DbcException;
@@ -105,6 +91,7 @@ public final class Ev3JavaVisitor extends AbstractJavaVisitor implements IEv3Vis
 
     protected ILanguage language;
     private final boolean isSayTextUsed;
+    private final boolean isARSensorUsed;
 
     /**
      * initialize the Java code generator visitor.
@@ -129,6 +116,7 @@ public final class Ev3JavaVisitor extends AbstractJavaVisitor implements IEv3Vis
         this.usedActors = checkVisitor.getUsedActors();
         this.usedImages = checkVisitor.getUsedImages();
         this.isSayTextUsed = checkVisitor.isSayTextUsed();
+        this.isARSensorUsed = checkVisitor.isARSensorUsed();
 
         this.loopsLabels = checkVisitor.getloopsLabelContainer();
 
@@ -194,6 +182,11 @@ public final class Ev3JavaVisitor extends AbstractJavaVisitor implements IEv3Vis
             if ( this.isInDebugMode ) {
                 nlIndent();
                 this.sb.append("hal.closeResources();\n");
+            }
+
+            if ( this.isARSensorUsed ) {
+                nlIndent();
+                this.sb.append("hal.stopAugmentedRealitySensor();\n");
             }
             decrIndentation();
             nlIndent();
@@ -681,6 +674,12 @@ public final class Ev3JavaVisitor extends AbstractJavaVisitor implements IEv3Vis
     }
 
     @Override
+    public Void visitAugmentedRealitySensor(AugmentedRealitySensor<Void> augmentedRealitySensor) {
+        this.sb.append("hal.getAugmentedRealitySensorDistance()");
+        return null;
+    }
+
+    @Override
     public Void visitMainTask(MainTask<Void> mainTask) {
         mainTask.getVariables().visit(this);
         nlIndent();
@@ -699,6 +698,22 @@ public final class Ev3JavaVisitor extends AbstractJavaVisitor implements IEv3Vis
             this.sb.append("hal.setLanguage(\"");
             this.sb.append(getLanguageString(this.language));
             this.sb.append("\");");
+        }
+        if (this.isARSensorUsed && !this.brickConfiguration.getRobotName().equals("ev3lejosV0")) {
+            nlIndent();
+            Optional<ConfigurationComponent> arOpt =
+                    this.brickConfiguration.getConfigurationComponentsValues()
+                            .stream()
+                            .filter(comp -> comp.getComponentType().equals("AUGMENTEDREALITY"))
+                            .findFirst();
+
+            arOpt.ifPresent(comp -> {
+                this.sb.append("hal.initAugmentedRealitySensor(\"")
+                        .append(comp.getProperty("IP_ADDRESS"))
+                        .append("\", ")
+                        .append(comp.getProperty("PORT"))
+                        .append(");");
+            });
         }
         return null;
     }

@@ -11,6 +11,7 @@ import de.fhg.iais.roberta.syntax.action.speech.SayTextAction;
 import de.fhg.iais.roberta.syntax.lang.expr.Expr;
 import de.fhg.iais.roberta.syntax.lang.expr.ListCreate;
 import de.fhg.iais.roberta.syntax.lang.functions.ListRepeat;
+import de.fhg.iais.roberta.syntax.sensor.generic.AugmentedRealitySensor;
 import de.fhg.iais.roberta.syntax.sensor.generic.CompassSensor;
 import de.fhg.iais.roberta.typecheck.BlocklyType;
 import de.fhg.iais.roberta.typecheck.NepoInfo;
@@ -78,6 +79,14 @@ public final class Ev3BrickValidatorVisitor extends AbstractBrickValidatorVisito
         super.visitSayTextAction(sayTextAction);
         if ( this.robotConfiguration.getRobotName().equals("ev3lejosV0") ) {
             sayTextAction.addInfo(NepoInfo.warning("BLOCK_NOT_EXECUTED"));
+        }
+        return null;
+    }
+
+    @Override
+    public Void visitAugmentedRealitySensor(AugmentedRealitySensor<Void> augmentedRealitySensor) {
+        if ( this.robotConfiguration.getRobotName().equals("ev3dev")) {
+            augmentedRealitySensor.addInfo(NepoInfo.warning("BLOCK_NOT_EXECUTED"));
         }
         return null;
     }
